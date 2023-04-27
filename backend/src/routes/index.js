@@ -1,3 +1,4 @@
 module.exports = {
-    postsRoutes: require('./posts.routes')
+    postsRoutes: require('./posts.routes'),
+    uploadsRoutes: require('./uploads.routes')
 }

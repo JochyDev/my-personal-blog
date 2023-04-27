@@ -1,9 +1,37 @@
-const  { Router } = require('express');
-const { createPost } = require('../controllers');
+const { Router } = require('express');
+const { check } = require("express-validator");
+
+// Middlewares
+const { validateFields } = require('../middlewares');
+// Helpers
+const { existsPostById } = require('../helpers');
+// Controllers
+const { getAllPosts, createPost, updatePost, deletePost } = require('../controllers');
 
 const router = Router();
 
-router.get('/', createPost);
+router.get('/', getAllPosts);
+
+router.post('/', [ 
+    check('title', 'title is required').not().isEmpty(),
+    check('markdown', 'markdown is required').not().isEmpty(),
+    check('img_url', 'image url is required').not().isEmpty(),
+    check('category', 'category is required').not().isEmpty(),
+    check('category', 'category isn\'t valid').isIn(['TUTORIAL', 'EXPERIENCE', 'ADVICE']),
+    validateFields
+], createPost);
+
+router.put('/:id', [
+    check('id', 'the id must be a valid mongo_id').isMongoId(),
+    check('id').custom( existsPostById ),
+    validateFields
+], updatePost);
+
+router.delete('/:id', [
+    check('id', 'the id must be a valid mongo_id').isMongoId(),
+    check('id').custom( existsPostById ),
+    validateFields
+], deletePost)
 
 
 module.exports = router;
