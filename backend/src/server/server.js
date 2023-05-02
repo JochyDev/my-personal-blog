@@ -5,7 +5,12 @@ const fileUpload = require('express-fileupload');
 const { dbConection } = require('../config/dbconfig');
 
 // Routes
-const { postsRoutes, subscribersRutes, uploadsRoutes } = require('../routes')
+const { 
+    postsRoutes, 
+    sectionsRutes,
+    subscribersRutes, 
+    uploadsRoutes 
+} = require('../routes')
 
 
 class Server {
@@ -15,8 +20,9 @@ class Server {
         this.port = process.env.PORT;
         this.paths = {
             posts: '/api/posts',
+            sections: '/api/sections',
             subscribers: '/api/subscribers',
-            uploads: '/api/uploads'
+            uploads: '/api/uploads',
         }
 
         // Conection to DB
@@ -50,6 +56,7 @@ class Server {
     }
     routes(){
         this.app.use(this.paths.posts, postsRoutes);
+        this.app.use(this.paths.sections, sectionsRutes);
         this.app.use(this.paths.subscribers, subscribersRutes);
         this.app.use(this.paths.uploads, uploadsRoutes);
     }

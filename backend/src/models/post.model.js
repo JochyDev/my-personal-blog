@@ -35,7 +35,7 @@ const PostSchema = new Schema({
         type: String,
         required: true
     }
-}, { timestamps: { createdAt: 'created_at' } });
+}, { timestamps: true });
 
 PostSchema.pre('validate', function(next){
     // if(this.title){

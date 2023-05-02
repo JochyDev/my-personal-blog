@@ -21,6 +21,6 @@ const SubscriberSchema = new Schema({
       required: true,
       default: false
     }
-  }, { timestamps: { createdAt: 'created_at' } });
+  }, { timestamps: true });
   
 module.exports = model('Subscriber', SubscriberSchema);;
