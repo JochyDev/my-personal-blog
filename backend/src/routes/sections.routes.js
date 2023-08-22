@@ -6,15 +6,17 @@ const { validateFields } = require('../middlewares');
 // Helpers
 // Controllers
 const { 
-    createSection, 
     getAllSections, 
+    getSectionByName,
+    createSection, 
     updateSection, 
-    deleteSection  
+    deleteSection
 } = require('../controllers');
 
 const router = Router();
 
 router.get('/', getAllSections)
+router.get('/:name', getSectionByName)
 router.post('/', createSection)
 router.put('/:id', updateSection)
 router.delete('/:id', deleteSection)

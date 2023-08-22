@@ -1,5 +1,11 @@
 const {Schema, model} = require('mongoose');
 
+// libraries needed for convert markdown to html
+const marked = require('marked');
+const createDomPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+const dompurify = createDomPurify( new JSDOM('').window );
+
 const SectionSchema = new Schema({
   name: {
     type: String,
@@ -26,7 +32,7 @@ const SectionSchema = new Schema({
   sanitizedHtml: {
     type: String,
     required: true
-  },
+  }
 }, { timestamps: true });
 
 SectionSchema.pre('validate', function(next){

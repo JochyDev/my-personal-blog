@@ -13,35 +13,50 @@ const getAllSections = async(req, res) => {
 
 }
 
-const createSection = async(req, res) => {
+const getSectionByName = async(req, res) => {
 
-    const { name, markdown, order, path } = req.body;
+    const { name } = req.params;
 
-    
-    const sectionData = {
-        name, 
-        markdown,
-        order,
-        path
-    }
-
-    const section = new Section(sectionData);
-
-    await section.save()
+    await Section.findOne({name})
     .then( data => {
         success(req, res, data)
     })
     .catch(err => {
         error(req, res, err);
     });
+
+}
+
+const createSection = async(req, res) => {
+
+    req.section = new Section();
+
+    await saveSection(req, res);
 }
 
 const updateSection = async(req, res) => {
     
     const { id } = req.params;
-    const { status, ...data } = req.body;
 
-    await Section.findByIdAndUpdate(id, data, {new: true})
+    req.section = await Section.findById(id);
+
+    if( !req.section){
+        return error(req, res, 'Section doesn\'t exist', 400);
+    }
+
+    await saveSection(req, res);
+}
+
+const saveSection = async (req, res) => {
+    let section = req.section;
+    const { name, markdown, order, path } = req.body;
+
+    section.name = name;
+    section.markdown = markdown;
+    section.order = order;
+    section.path = path;
+
+    await section.save()
     .then( data => {
         success(req, res, data)
     })
@@ -65,6 +80,7 @@ const deleteSection = async (req, res) => {
 
 module.exports = {
     getAllSections,
+    getSectionByName,
     createSection,
     updateSection,
     deleteSection
