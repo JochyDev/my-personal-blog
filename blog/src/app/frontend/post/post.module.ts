@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PostComponent } from './post.component';
 import { PostRoutingModule } from './post-routing.module';
+import { FooterModule } from 'src/app/common/footer/footer.module';
 
 
 
@@ -11,7 +12,11 @@ import { PostRoutingModule } from './post-routing.module';
   ],
   imports: [
     CommonModule,
-    PostRoutingModule
+    PostRoutingModule,
+    FooterModule
+  ],
+  exports: [
+    PostComponent
   ]
 })
 export class PostModule { }

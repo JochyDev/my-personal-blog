@@ -12,12 +12,16 @@ const routes: Routes = [
         loadChildren: () => import('../../frontend/home/home.module').then(m => m.HomeModule)
       },
       {
+        path: 'about',
+        loadChildren: () => import('../../frontend/about-me/about-me.module').then(m => m.AboutMeModule)
+      },
+      {
         path: 'post',
         loadChildren: () => import('../../frontend/post/post.module').then(m => m.PostModule)
       },
       {
-        path: 'about',
-        loadChildren: () => import('../../frontend/about-me/about-me.module').then(m => m.AboutMeModule)
+        path: 'timeline',
+        loadChildren: () => import('../../frontend/timeline/timeline.module').then(m => m.TimelineModule)
       },
       {
         path: '',

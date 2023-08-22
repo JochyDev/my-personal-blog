@@ -1,0 +1,17 @@
+<div class="container text-center" style="height: 100vh;" *ngIf="isLoading">
+    <div class="spinner-border text-primary align-self-center" style="margin-top: 35%;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<section class="py-5">
+    <div class="container">
+        <ngx-twitter-timeline 
+            [source]="{sourceType: 'profile', screenName: 'JochyDev'}"
+            (onLoad)="onLoad()">
+        </ngx-twitter-timeline>
+    </div>
+</section>
+<!-- <a class="twitter-timeline" href="https://twitter.com/JochyDev?ref_src=twsrc%5Etfw">Tweets by JochyDev</a>  -->
+
+<app-footer/>
