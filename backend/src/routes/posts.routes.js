@@ -6,11 +6,18 @@ const { validateFields } = require('../middlewares');
 // Helpers
 const { existsPostById } = require('../helpers');
 // Controllers
-const { getAllPosts, createPost, updatePost, deletePost } = require('../controllers');
+const { 
+    getAllPosts,
+    getPostById, 
+    createPost, 
+    updatePost, 
+    deletePost } = require('../controllers');
 
 const router = Router();
 
 router.get('/', getAllPosts);
+
+router.get('/:id', getPostById);
 
 router.post('/', [ 
     check('title', 'title is required').not().isEmpty(),

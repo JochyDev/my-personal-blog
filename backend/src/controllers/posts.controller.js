@@ -3,7 +3,7 @@ const { success, error } = require("../helpers");
 
 
 const getAllPosts =  async (req, res ) => {
-    const { limit = 10, offset = 0 } = req.query;
+    const { limit = 100, offset = 0 } = req.query;
     const query = { status: true };
 
     await Promise.all([
@@ -18,6 +18,19 @@ const getAllPosts =  async (req, res ) => {
     .catch(err => {
         error(req, res, err);
     });
+}
+
+const getPostById = async(req, res) => {
+    const { id } = req.params;
+
+    await Post.findById(id)
+    .then( data => {
+        success(req, res, data)
+    })
+    .catch(err => {
+        error(req, res, err);
+    });
+
 }
 
 const createPost = async (req, res) => {
@@ -74,6 +87,7 @@ const deletePost = async (req, res) => {
 
 module.exports = {
     getAllPosts,
+    getPostById,
     createPost,
     updatePost,
     deletePost
