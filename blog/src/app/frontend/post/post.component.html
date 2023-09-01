@@ -2,15 +2,21 @@
     <div class="container single-col-max-width">
         <header class="blog-post-header">
             <h2 class="title mb-2">{{post.title}}</h2>
+            <h5 class="subtitle mb-2">{{post.subtitle}}</h5>
             <div class="meta mb-3">
-                <span class="date">{{post.createdAt}}</span>
+                <span class="date">{{post.createdAt | date}}</span>
                 <span class="catagory">{{post.category}}</span>
                 <span class="time">5 min read</span>
                 <span class="comment"><a  class="text-link" href="#">4 comments</a></span>
             </div>
         </header>
 
-        <div class="blog-post-body" style="height: 100vh;" [innerHTML]="post.sanitizedHtml">
+        <figure class="blog-banner">
+            <img class="img-fluid" src="https://res.cloudinary.com/dsiscb5cs/image/upload/v1685489696/cfrviihzks2suuyioto4.jpg" alt="image">
+            <!-- <figcaption class="mt-2 text-center image-caption">Image Credit: <a class="theme-link" href="https://made4dev.com?ref=devblog" target="_blank">made4dev.com (Premium Programming T-shirts)</a></figcaption> -->
+        </figure>
+
+        <div class="blog-post-body" [innerHTML]="post.sanitizedHtml">
         </div>
         
         

@@ -1,2 +1,11 @@
+
+<div *ngIf='spinnerService._visible | async' class='loading-shade-full row '>
+    <div class='col text-center'>
+        <h2 style='color: white; font-weight: 600;'>{{ 'Por favor espere'  }}...</h2>
+        <div class="spinner-border text-primary align-self-center" style="margin: auto;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
 <router-outlet/>
 

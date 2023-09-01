@@ -1,7 +1,7 @@
 <section class="cta-section theme-bg-light py-5">
     <div class="container text-center single-col-max-width">
     <h2 class="heading">Bienvenidos a mi Blog</h2>
-    <div class="intro">Compartiendo experiencias en el desarrollo de software: Consejos, trucos y anécdotas de un programador apasionado. Descubre cómo voy superado obstáculos y alcanzo mis metas como desarrollador. ¿Quieres aprender junto a mí? Suscríbete y no te pierdas ninguno de mis artículos</div>
+    <div class="intro">Compartiendo experiencias en el desarrollo de software. Descubre cómo voy superado obstáculos y alcanzo mis metas como desarrollador. ¿Quieres aprender junto a mí? Suscríbete y no te pierdas ninguno de mis artículos</div>
     <app-subscription-form/>
     </div><!--//container-->
 </section>
@@ -10,7 +10,7 @@
 <section class="blog-list px-3 py-5 p-md-5">
     <div class="container">
     <div class="row justify-content-between">
-        <div *ngFor="let post of getArticlesForCurrentPage()" class="item col-4 mb-5">
+        <div *ngFor="let post of getArticlesForCurrentPage()" class="item col-12 col-md-4 mb-5">
             <!-- <div class="row g-3 g-xl-0"> -->
             <div class="ratio ratio-16x9 overflow-hidden">
                 <img class="object-fit-cover" style="height: auto;" src="assets/images/blog/blog-post-thumb-1.jpg" alt="image">
@@ -21,14 +21,15 @@
                 <div class="meta mb-1">
                   <span class="category">{{post.category}}</span>
                   <!-- TODO: Hacer una directiva o un pipe que reciba una fecha y diga hace cuantos días se publicó -->
-                  <span class="date">{{post.createdAt}}</span>
+                  <span class="date">{{post.createdAt | date}}</span>
                 </div>
-                <div class="intro" [innerHTML]="post.sanitizedHtml"></div>
+                <div class="intro" [innerHTML]="(post.sanitizedHtml | slice: 0:100) + '...'" ></div>
                 <a class="text-link" [routerLink]="['/post', post.id]">Read more &rarr;</a>
             </div><!--//col-->
             <!--</div>//row-->
         </div><!--//item col-4-->
 
+        <!-- TODO: make a component for nav -->
         <nav class="mt-5" *ngIf="totalPosts > postsPerPage">
           <ul class="pagination justify-content-center">
             <li class="page-item" [class.disabled]="currentPage === 1">
